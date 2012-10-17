@@ -8,7 +8,6 @@ class Controller_Courses extends Controller{
 	}
     
     function action_index() {
-       
 
         $data = $this->model->get_data();
         $this->view->generate('courses_view.php','template_view.php',$data);
@@ -28,10 +27,10 @@ class Controller_Courses extends Controller{
     }
     function action_languages(){
         $data = $this->model->get_data();
-        $this->view->generate('courses_view.php','template_view.php');
+        $data = $this->model->languages();
+        $this->view->generate('courses_view.php','template_view.php',$data);
     }
     
 }
 
 
-?>
