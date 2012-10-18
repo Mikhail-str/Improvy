@@ -11,9 +11,8 @@
         <link href="/css/style.css" rel="stylesheet" type="text/css"/>
         <script src="/js/jquery.js" type="text/javascript"></script>
         <script src="/js/jquery.cookie.js" type="text/javascript"></script>
-        <script src="/js/code.js" type="text/javascript"></script>
-        
-       <link rel="stylesheet" href="/css/jquery-ui.css" />
+        <script src="/js/code.js" type="text/javascript"></script>        
+       <link rel="stylesheet" href="/css/jquery-ui-1.9.0.custom.css" />
        <script src="/js/jquery-ui.js"></script>
 
 		<script src="/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>

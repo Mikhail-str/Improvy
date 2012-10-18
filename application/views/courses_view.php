@@ -1,12 +1,12 @@
 <div class="container">
     <div class="row">
         <div class="span3">
-           
-<div id="side">
 
-  <h3><a href="#">Спорт/Фитнес</a></li></h3>
+<div id="side" >
+
+  <h3><li><a href="sport">Спорт/Фитнес</a></li></h3>
   <ul class="nav nav-list">
-                    <li><a href="sport">Все</a></li>
+                    <li><a href="/courses/sport">Все</a></li>
                     <li><a href="yoga">Yoga</a></li>
                     <li><a href="pilates">Pilates</a></li>
                     <li><a href="strip_dance">Strip Dance</a></li>
@@ -36,7 +36,8 @@
 
   <h3><li><a href="/courses/languages">Иностранные языки</a></li></h3>
   <ul class="nav nav-list">
-                    <li><a href="/courses/languages">Английский</a></li>
+                    <li><a href="/courses/languages">Все</a></li>
+                    <li><a href="№">Английский</a></li>
                     <li><a href="#">Французский</a></li>
                     <li><a href="#">Испанский</a></li>
                     <li><a href="#">Итальянский</a></li>
