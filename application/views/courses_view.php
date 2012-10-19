@@ -6,7 +6,6 @@
 
   <h3><li><a href="sport">Спорт/Фитнес</a></li></h3>
   <ul class="nav nav-list">
-                    <li><a href="/courses/sport">Все</a></li>
                     <li><a href="yoga">Yoga</a></li>
                     <li><a href="pilates">Pilates</a></li>
                     <li><a href="strip_dance">Strip Dance</a></li>
@@ -36,7 +35,6 @@
 
   <h3><li><a href="/courses/languages">Иностранные языки</a></li></h3>
   <ul class="nav nav-list">
-                    <li><a href="/courses/languages">Все</a></li>
                     <li><a href="№">Английский</a></li>
                     <li><a href="#">Французский</a></li>
                     <li><a href="#">Испанский</a></li>
@@ -93,7 +91,7 @@
                          echo ("<td class='picture'><img src='../images/1.jpg'/></td>
             <td class='details'>
                 <span class='page-header'> 
-                    <h4><a href=''>".$row['name']."</a><p><small>".$row['description']."</small></h4>
+                    <h4><a href=''>".$row['s']."</a><p><small>".$row['name_rus']."</small></h4>
                 </span>
             </td>
             <td class='price'><p class='lead'>".$row['price']."</p></td>
