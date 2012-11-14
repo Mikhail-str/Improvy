@@ -1,7 +1,10 @@
 $(function() {
+
+})
+$(function() {
 	$('#myModal').hide();
 
-	if($.cookie("login")) {
+	/*if($.cookie("login")) {
 		$("#b").hide();
 		$("#b3").hide();
 		$("#b1").show();
@@ -10,15 +13,25 @@ $(function() {
 		$("#b1").hide();
 		$("#b2").hide();
 
-	}
+	}*/
 	$("#b").click(function() {
-		$('#myModal').modal('show')
-		$("#entForm").hide();
-		$("#regForm").show();
+		//$('#myModal').modal('show')
+		//$("#entForm").hide();
+		//$("#regForm").show();
+		location.href = '/registration';
 
 	})
 	$("#b2").click(function() {
-		$.cookie("login", null);
+		$.cookie("login", null, {
+			path: '/'
+		});
+		$.cookie("sesid", null, {
+			path: '/'
+		});
+		$.ajax({
+			url: '/php/del.php'
+		});
+		location.href = '/';
 	})
 	$("#b3").click(function() {
 		$('#myModal').modal('show');
@@ -29,65 +42,49 @@ $(function() {
 $(function() {
 	$("#sub").click(function() {
 		$(".err").remove();
-		var name = $("#Inputname").val()
+		var Cname = $("#Inputname").val();
+		var name = $("#fio").val();
 		var email = $("#inputEmail").val();
-		var pas1 = $("#inputPassword").val();
-		var pas2 = $("#inputPassword2").val();
-		var k = 0;
-		for(var i = 0; i < email.length; i++) {
-			if(email[i] == '@') {
-				k++;
-			}
-		};
-		if((k != 1) && (pas1 != pas2)) {
-			$("#inputEmail").after("<p class='err'>Email введен не верно</p>");
-			$("#inputPassword2").after("<p class='err'>Пароли не совпадают</p>");
-			return false;
-		} else {
-			if((k != 1) && (pas1.length < 6)) {
-				$("#inputEmail").after("<p class='err'>Email введен не верно</p>");
-				$("#inputPassword").after("<p class='err'>Длина пароля должна быть не меньше 6 символов</p>");
-				return false;
-			} else {
+		var Address = $("#Address").val();
+		var Site = $("#Site").val();
+		var Phone = $("#Phone").val();
+		
 
-				if(k != 1) {
-					//alert(1);
-					$("#inputEmail").after("<p class='err'>Email введен не верно</p>");
-					return false;
-				} else {
-					if(pas1 != pas2) {
-						//alert(1);
-						$("#inputPassword2").after("<p class='err'>Пароли не совпадают</p>");
-						return false;
-					} else {
-						if(pas1.length < 6) {
-							//alert(1);
-							$("#inputPassword").after("<p class='err'>Длина пароля должна быть не меньше 6 символов</p>");
-							return false;
-						}
-					}
-				}
-			}
+		if(/^[a-zA-Z0-9](([a-z0-9\-_\+\&]?)+[a-z0-9])?\@((\w([a-zA-Z0-9\-_]+\w)?\.[a-z]{2,4})|(([01]?\d\d|2[0-4]\d|25[0-5])\.([01]?\d\d|2[0-4]\d|25[0-5])\.([01]?\d\d |2[0-4]\d|25[0-5])\.([01]?\d\d|2[0-4]\d|25[0-5]))|(localhost))$/i.test(email))
+		{
+			
+		}else{
+			$("#1").append("<p class='err' style='color:red'>Email введен не верно</p>");
+			return false;
+		}
+		
+		if(Cname == '' ||name == '' || Address == '' || Phone == '')
+		{
+			$("#1").append("<p class='err' style='color:red'>Заполните все обязательные поля</p>");
+			return false;
 		}
 		////////
 		$.ajax({
 			type: "POST",
 			url: '/php/registration.php',
 			data: {
-				"name": name,
-				"pass": pas1,
-				"email": email
+				"Cname": Cname,
+				"fio": name,
+				"email": email,
+				"address": Address,
+				"site": Site,
+				"phone": Phone
 			},
 			success: function(data) {
+				alert(1);
 				if(data == 1) {
-					//
-					$("#sub").after("<p class='err'>Пользователь с таким именим или Email существует</p>");
+					$("#1").append("<p class='err'>Пользователь с таким именим или Email существует</p>");
 					//alert(1);
 				} else {
 					$("#regForm").hide();
 					$("#thx").show();
 					//window.location = "http://localhost:8010/main#";
-					$('#myModal').modal('show');
+					//$('#myModal').modal('show');
 					//window.location = "/main";
 					//alert(data);
 				};
@@ -103,15 +100,16 @@ $(function() {
 			type: "POST",
 			url: '/php/enter.php',
 			data: {
-				"pass": pas,
+				"password": pas,
 				"email": email
 			},
 			success: function(data) {
 				if(data == 1) {
-
+					$('#myModal').modal('show');
 					$("#ent").after("<div class='er'>Пользователя с таким Email не существует или вы ввели неверно парольспас</div>");
 				} else {
-					window.location = "/main";
+					window.location = location.href.substring(0, location.href.length - 1);
+					//alert($.cookie("PHPSESSID"))
 					//$('#myModal').modal('show');
 				};
 			}

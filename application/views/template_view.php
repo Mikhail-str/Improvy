@@ -20,6 +20,19 @@
         
         
 	</head>
+  <?php
+  /*  session_start();
+    include '/php/db.php';
+
+    
+    if (isset($_COOKIE['login'])) {
+      $ck = $_COOKIE['login'];
+       $result = mysql_query("SELECT `id`,`pass` FROM `users` WHERE `pass`='$ck'");
+
+       $row = mysql_fetch_array($result);          
+        $_SESSION['id'] = $row['id'];
+     } */
+  ?>
 	<body >    
         <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
           <div class="modal-header">
@@ -27,40 +40,7 @@
             <h3 id="myModalLabel">ImprovY</h3>
           </div>
           <div class="modal-body">
-              <p>Здравствуйте, зарегистрируйтесь пложалуйста чтобы добавить свои курсы</p>
-                <p>Регистрация простая, заполните поля ниже</p>
-                <form class="form-horizontal" method="POST" action="" id="regForm">
-                      <div class="control-group">
-                        <label class="control-label" for="inputEmail">Название компании</label>
-                        <div class="controls">
-                          <input type="text" id="Inputname" placeholder="Название компании" name="name"><div id="1"></div>
-                        </div>
-                      </div>
-                      <div class="control-group">
-                        <label class="control-label" for="inputEmail">Email</label>
-                        <div class="controls">
-                          <input type="text" id="inputEmail" placeholder="Email" name="Email"><div id="1"></div>
-                        </div>
-                      </div>
-                      <div class="control-group">
-                        <label class="control-label" for="inputPassword">Пароль</label>
-                        <div class="controls">
-                          <input type="password" id="inputPassword" placeholder="Пароль" name="Pass">
-                        </div>
-                      </div>
-                      <div class="control-group">
-                        <label class="control-label" for="inputPassword">Повторите пароль</label>
-                        <div class="controls">
-                          <input type="password" id="inputPassword2" placeholder="Пароль">
-                        </div>
-                      </div>
-                      <div class="control-group">
-                        <div class="controls">
-                          <button class="btn btn-primary" type="button" id="sub">Регистрация</button>                                                 
-                        </div>
-                      </div>                      
-                </form>
-                     <form class="form-horizontal" method="POST" action="" id="entForm">
+                <form class="form-horizontal" method="POST" action="" id="entForm">
                      <div class="control-group">
                         <label class="control-label" for="inputEmail">Email</label>
                         <div class="controls">
@@ -95,12 +75,13 @@
                                 <a class="brand" href="/main">Санкт-Петербург</a>
                                 <ul class="nav pull-right">
                                     <li><a href='/contacts'>Контакты</a></li>
-                                    <li><a href='#' id="b">Регистрация</a></li>
-                                    <li><a href='#' id="b3">Вход</a></li>
-
-                                    <li><a href='#' id="b1">Личный кабинет</a></li>
-                                    <li><a href='' id="b2">Выход</a></li>
-                                    <li><button class="btn btn-primary" type="button">Добавить курсы</button></li>
+                                    <?php
+                                   if (!isset($_SESSION['id'])) {
+                                    echo("<li><a href='#' id='b3'>Вход</a></li>
+                                      <li><button class='btn btn-primary' type='button' id='b'>Добавить курсы</button></li>");
+                                    } else echo("<li><a href='#' id='b1'>Личный кабинет</a></li>
+                                    <li><a href='#' id='b2'>Выход</a></li>");
+                                    ?>
                                     <?php 
 //                                        
 //                                        switch($content_view){

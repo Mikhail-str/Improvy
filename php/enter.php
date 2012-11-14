@@ -1,16 +1,21 @@
 <?php
 	include 'db.php';
 	//echo $name;
-	$pass = md5($_POST['pass']);
+	$password = md5($_POST['password']);
 	$email = $_POST['email'];
 
-	$result = mysql_query("SELECT `email`,`pass`,`name` FROM `users` WHERE `email`='$email'");
+	$result = mysql_query("SELECT `email`,`password`,`compname_rus`,`id_company` FROM `companies` WHERE `email`='$email'");
 	if ($result!=0) {
 		
 	
 	if(mysql_num_rows($result) > 0) {
         while($row = mysql_fetch_array($result)) {
-        	setcookie ("login", $row['name'], time() + 50000, '/');
+        	$val = md5($row['password'].md5($row['compname_rus']));
+        	setcookie ("sesid", $val,time() + 50000,'/');
+        	setcookie ("login", $row['id_company'],time() + 50000,'/');
+        	//$rez = mysql_query("SELECT * FROM `users` WHERE `pass`='$pass'");
+				session_start();
+				$_SESSION['id'] = $row['id_company'];
         }
     }
     }else echo 1;

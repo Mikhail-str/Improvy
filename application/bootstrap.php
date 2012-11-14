@@ -18,6 +18,6 @@ require_once 'core/controller.php';
 	> Backup
 	> и др.
 */
-
 require_once 'core/route.php';
+require_once 'core/auth.php';
 Route::start(); // запускаем маршрутизатор
