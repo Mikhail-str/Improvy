@@ -8,23 +8,25 @@
   <div class="span12">    
         <p>Здравствуйте, зарегистрируйтесь пложалуйста чтобы добавить свои курсы</p>
         <p>Регистрация простая, заполните поля ниже</p>
+        <p>Поля отмеченные <font color="red">*</font> обязательный для заполнения!</p>
+        <p id="thx" style="display:none;">Спасибо за регистрацию! нажмите <a href="/main">сюда</a> чтобы начать работать</p>
                 <form class="form-horizontal" method="POST" action="" id="regForm">
                   <div class="row">
                     <div class="span6">
                       <fieldset>
                       
-                        <label >Название компании</label>
+                        <label >Название компании <font color="red">*</font></label>
                         
                           <input type="text" id="Inputname" class="span4" placeholder="Название компании" name="name">
                         
                       
                       
-                        <label >Имя Фамилия</label>
+                        <label >Имя Фамилия <font color="red">*</font></label>
                         
                           <input type="text" id="fio" class="span4" placeholder="Имя Фамилия" name="fio">
                       
                       
-                        <label>Email</label>
+                        <label>Email <font color="red">*</font></label>
                         
                           <input type="text" id="inputEmail" class="span4" placeholder="Email" name="Email">
                       
@@ -32,7 +34,7 @@
                     </div>
                     <div class="span6">
                       
-                        <label  >Адрес компании</label>
+                        <label  >Адрес компании <font color="red">*</font></label>
                        
                           <input type="text" id="Address" class="span4" placeholder="" name="Address">
                        
@@ -42,7 +44,7 @@
                           <input type="text" id="Site" class="span4" placeholder="" name="Site">
                        
                       
-                        <label >Телефон</label>
+                        <label >Телефон <font color="red">*</font></label>
                        
                           <input type="text" id="Phone" class="span4" placeholder="" name="Phone">
                                           
@@ -59,6 +61,7 @@
                       </div>       
                       </div>               
                 </form>
+
   </div>
 </div>
 </div>

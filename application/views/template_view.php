@@ -183,7 +183,7 @@
      } */
   ?>
 	<body >    
-        <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             <h3 id="myModalLabel">ImprovY</h3>
@@ -208,8 +208,9 @@
                         </div>
                       </div>                      
                 </form>
-                <p id="thx" style="display:none">Спасибо за регистрацию! нажмите <a href="/main">сюда</a> чтобы начать работать</p>
+                
           </div>
+         
           <div class="modal-footer">
            <!-- <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
             <button class="btn btn-primary">Save changes</button> -->
@@ -226,27 +227,11 @@
                                     <li><a href='/contacts'>Контакты</a></li>
                                     <?php
                                    if (!isset($_SESSION['id'])) {
-                                    echo("<li><a href='#' id='b3'>Вход</a></li>
+                                    echo("<li><a href='#enter' id='b3'>Вход</a></li>
                                       <li><button class='btn btn-primary' type='button' id='b'>Добавить курсы</button></li>");
                                     } else echo("<li><a href='#' id='b1'>Личный кабинет</a></li>
                                     <li><a href='#' id='b2'>Выход</a></li>");
-                                    ?>
-                                    <?php 
-//                                        
-//                                        switch($content_view){
-//                                            case "main_view.php":   echo "<li class='active'><a href='/main'>Главная</a></li>
-//                                                                    <li><a href='/contacts'>Контакты</a></li>
-//                                                                    <li><a href='/portfolio'>О нас</a></li>" ; break;
-//                                            case "contacts_view.php":   echo "<li><a href='/main'>Главная</a></li>
-//                                                                    <li class='active'><a href='/contacts'>Контакты</a></li>
-//                                                                    <li><a href='/portfolio'>О нас</a></li>"; break;
-//                                            case "portfolio_view.php":   echo "<li ><a href='/main'>Главная</a></li>
-//                                                                    <li><a href='/contacts'>Контакты</a></li>
-//                                                                    <li class='active'><a href='/portfolio'>О нас</a></li>";break;
-//                                            
-//                                        }
-//                                    ?>
-                                    
+                                    ?>                         
                                 </ul>
                             </div>
                         </div>

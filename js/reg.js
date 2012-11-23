@@ -1,9 +1,5 @@
 $(function() {
-
-})
-$(function() {
-	$('#myModal').hide();
-
+	//$('#myModal').hide();
 	/*if($.cookie("login")) {
 		$("#b").hide();
 		$("#b3").hide();
@@ -48,18 +44,16 @@ $(function() {
 		var Address = $("#Address").val();
 		var Site = $("#Site").val();
 		var Phone = $("#Phone").val();
-		
 
-		if(/^[a-zA-Z0-9](([a-z0-9\-_\+\&]?)+[a-z0-9])?\@((\w([a-zA-Z0-9\-_]+\w)?\.[a-z]{2,4})|(([01]?\d\d|2[0-4]\d|25[0-5])\.([01]?\d\d|2[0-4]\d|25[0-5])\.([01]?\d\d |2[0-4]\d|25[0-5])\.([01]?\d\d|2[0-4]\d|25[0-5]))|(localhost))$/i.test(email))
-		{
-			
-		}else{
+
+		if(/^[a-zA-Z0-9](([a-z0-9\-_\+\&]?)+[a-z0-9])?\@((\w([a-zA-Z0-9\-_]+\w)?\.[a-z]{2,4})|(([01]?\d\d|2[0-4]\d|25[0-5])\.([01]?\d\d|2[0-4]\d|25[0-5])\.([01]?\d\d |2[0-4]\d|25[0-5])\.([01]?\d\d|2[0-4]\d|25[0-5]))|(localhost))$/i.test(email)) {
+
+		} else {
 			$("#1").append("<p class='err' style='color:red'>Email введен не верно</p>");
 			return false;
 		}
-		
-		if(Cname == '' ||name == '' || Address == '' || Phone == '')
-		{
+
+		if(Cname == '' || name == '' || Address == '' || Phone == '') {
 			$("#1").append("<p class='err' style='color:red'>Заполните все обязательные поля</p>");
 			return false;
 		}
@@ -76,7 +70,6 @@ $(function() {
 				"phone": Phone
 			},
 			success: function(data) {
-				alert(1);
 				if(data == 1) {
 					$("#1").append("<p class='err'>Пользователь с таким именим или Email существует</p>");
 					//alert(1);

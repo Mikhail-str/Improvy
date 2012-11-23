@@ -14,7 +14,8 @@
 	
 	
 	$checkEmail = mysql_fetch_array(mysql_query("SELECT `email` FROM `companies` WHERE `email`='$email'"));
-	if ($checkEmail['email'] != null ) {
+	$checkCname = mysql_fetch_array(mysql_query("SELECT `compname_rus` FROM `companies` WHERE `compname_rus`='$Cname'"));
+	if (($checkEmail['email'] != null) || ($checkCname['compname_rus'])) {
 		echo 1;
 	}
 	else

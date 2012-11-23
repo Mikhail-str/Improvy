@@ -45,6 +45,17 @@ class Controller_Courses extends Controller{
         $this->view->generate('courses_view.php','template_view.php',$data);
     }
     
+    function action_yoga(){
+        $course = "yoga";
+        $data = $this->model->get_data($course);
+        $this->view->generate('courses_view.php','template_view.php',$data);
+    }
+
+    function action_pilates(){
+        $course = "pilates";
+        $data = $this->model->get_data($course);
+        $this->view->generate('courses_view.php','template_view.php',$data);
+    }
     
 }
 
