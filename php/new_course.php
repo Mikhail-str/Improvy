@@ -1,27 +1,166 @@
 <?php
-
+session_start();
+function translit($str) 
+{
+    $translit = array(
+        "Рђ"=>"A","Р‘"=>"B","Р’"=>"V","Р“"=>"G",
+        "Р”"=>"D","Р•"=>"E","Р–"=>"J","Р—"=>"Z","Р"=>"I",
+        "Р™"=>"Y","Рљ"=>"K","Р›"=>"L","Рњ"=>"M","Рќ"=>"N",
+        "Рћ"=>"O","Рџ"=>"P","Р "=>"R","РЎ"=>"S","Рў"=>"T",
+        "РЈ"=>"U","Р¤"=>"F","РҐ"=>"H","Р¦"=>"TS","Р§"=>"CH",
+        "РЁ"=>"SH","Р©"=>"SCH","РЄ"=>"","Р«"=>"YI","Р¬"=>"",
+        "Р­"=>"E","Р®"=>"YU","РЇ"=>"YA","Р°"=>"a","Р±"=>"b",
+        "РІ"=>"v","Рі"=>"g","Рґ"=>"d","Рµ"=>"e","Р¶"=>"j",
+        "Р·"=>"z","Рё"=>"i","Р№"=>"y","Рє"=>"k","Р»"=>"l",
+        "Рј"=>"m","РЅ"=>"n","Рѕ"=>"o","Рї"=>"p","СЂ"=>"r",
+        "СЃ"=>"s","С‚"=>"t","Сѓ"=>"u","С„"=>"f","С…"=>"h",
+        "С†"=>"ts","С‡"=>"ch","С€"=>"sh","С‰"=>"sch","СЉ"=>"y",
+        "С‹"=>"yi","СЊ"=>"","СЌ"=>"e","СЋ"=>"yu","СЏ"=>"ya"
+    );
+    return strtr($str,$translit);
+}
 include 'db.php';
-$name = $_POST['name_newcourse'];
+$company_new_course = $_SESSION['id'];
+
+
+$name = $_POST['name_new_course'];
+$name_eng = translit($name);
 $description = $_POST['description_new_course'];
+
 $type = $_POST['type_new_course'];
 $image_link = $_POST['image_new_course_link'];
 $image_local = $_POST['image_new_course_local'];
-//start
-//Проверка изображения на наличие скриптов и всякой другой хуйни  
+if (!isset($_POST['name_new_course'])) 
+{
+   echo(" <script>alert('Р”РѕР±СЂС‹Р№ РґРµРЅСЊ')</script>");
+
+}
+
+
+$name_new_venue = $_POST['name_new_venue'];
+$phone_new_venue = $_POST['phone_new_venue'];
+$metro_new_venue = $_POST['metro_new_venue'];
+$found_adress_new_venue = $_POST['found_adress_new_venue'];
+
+$countre_adress_new_venue = $_POST['countre_adress_new_venue'];
+$street_adress_new_venue = $_POST['street_adress_new_venue'];
+$home_adress_new_venue = $_POST['home_adress_new_venue'];
+$corpus_adress_new_venue = $_POST['corpus_adress_new_venue'];
+
+//echo "Р—Р°РїСЂРѕСЃ Рє РіРµРѕРєРѕРґРµСЂСѓ РїРѕ Р°РґСЂРµСЃСѓ: </br>";
+$link_geocoder =    "РіРѕСЂРѕРґ ".$countre_adress_new_venue.
+                    " СѓР»РёС†Р° ".$street_adress_new_venue.
+                    " РґРѕРј ".$home_adress_new_venue.
+                    " РєРѕСЂРїСѓСЃ ".$corpus_adress_new_venue ;
+        
+//echo $link_geocoder;
+
+
+
+
+
+$adress = $link_geocoder;
+$key = "ACaQDlEBAAAADx8EBAIAVvmKSReS9YyV0-V0wOJcrlmSxgIAAAAAAAAAAABvYWqTFI1UJvu1H3wCMja4lQhHDA==";
+$adress1=urlencode($adress);
+$url="http://geocode-maps.yandex.ru/1.x/?geocode=".$adress1."&key=".$key;
+$content=file_get_contents($url);
+preg_match('/<pos>(.*?)<\/pos>/',$content,$point);
+$coordinate=str_replace(' ',', ',trim(strip_tags($point[1])));
+//echo "<br>".$coordinate;
+
+
+
+$result = mysql_query("
+               INSERT INTO  `improvy`.`venues` (
+                `id_venue` ,
+                `id_company` ,
+                `venuename_eng` ,
+                `venuename_rus` ,
+                `telephone` ,
+                `metro` ,
+                `country` ,
+                `street` ,
+                `home` ,
+                `how_found` ,
+                `coordinate`
+                )
+                VALUES (
+                    NULL , 
+                    '$company_new_course', 
+                    '$name_eng',
+                    '$name_new_venue',  
+                    '$phone_new_venue',  
+                    '$metro_new_venue',  
+                    '$countre_adress_new_venue',  
+                    '$street_adress_new_venue',  
+                    '$home_adress_new_venue',  
+                    '$corpus_adress_new_venue',
+                    '$coordinate'
+);
+");
+
+if($result){
+    echo "1";
+}
+else {
+    die(mysql_error());
+}
+
+/**
+ * echo "
+ *         <div id='ymaps-map-id_135272645449970217571' style='width: 210px; height: 300px;'></div>
+ *         <script type='text/javascript'>
+ *         function fid_135272645449970217571(ymaps) {
+ *         var map = new ymaps.Map('ymaps-map-id_135272645449970217571', {center: [".$coordinate."], zoom: 13, type: 'yandex#map'});
+ *         map.controls.add('zoomControl').add('mapTools').add(new ymaps.control.TypeSelector(['yandex#map', 'yandex#satellite', 'yandex#hybrid', 'yandex#publicMap']));
+ *         map.geoObjects.add(new ymaps.Placemark([".$coordinate."], {balloonContent: '".$found_adress_new_venue." ".$phone_new_venue."', iconContent: '1'}, {preset: 'twirl#redIcon'}));
+ *         };</script>";
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+//РџСЂРѕРІРµСЂРєР° РёР·РѕР±СЂР°Р¶РµРЅРёСЏ РЅР° РЅР°Р»РёС‡РёРµ СЃРєСЂРёРїС‚РѕРІ Рё РІСЃСЏРєРѕР№ РґСЂСѓРіРѕР№ 
 if($_FILES["filename"]["size"] > 1024*3*1024)
 {
-    echo ("Размер файла превышает три мегабайта");
+    echo ("Р Р°Р·РјРµСЂ С„Р°Р№Р»Р° РїСЂРµРІС‹С€Р°РµС‚ С‚СЂРё РјРµРіР°Р±Р°Р№С‚Р°");
     exit;
 }
-// Проверяем загружен ли файл
+// РџСЂРѕРІРµСЂСЏРµРј Р·Р°РіСЂСѓР¶РµРЅ Р»Рё С„Р°Р№Р»
 if(is_uploaded_file($_FILES["filename"]["tmp_name"]))
 {
-     // Если файл загружен успешно, перемещаем его
-     // из временной директории в конечную
+     // Р•СЃР»Рё С„Р°Р№Р» Р·Р°РіСЂСѓР¶РµРЅ СѓСЃРїРµС€РЅРѕ, РїРµСЂРµРјРµС‰Р°РµРј РµРіРѕ
+     // РёР· РІСЂРµРјРµРЅРЅРѕР№ РґРёСЂРµРєС‚РѕСЂРёРё РІ РєРѕРЅРµС‡РЅСѓСЋ
      move_uploaded_file($_FILES["filename"]["tmp_name"], "/path/to/file/".$_FILES["filename"]["name"]);
 } 
 else {
-     echo("Ошибка загрузки файла");
+     echo("РћС€РёР±РєР° Р·Р°РіСЂСѓР·РєРё С„Р°Р№Р»Р°");
 }
 $imageinfo = getimagesize($_FILES['userfile']['tmp_name']);
 if($imageinfo['mime'] != 'image/gif' && $imageinfo['mime'] != 'image/jpeg') 
@@ -38,9 +177,11 @@ echo "File is valid, and was successfully uploaded.\n";
 } else {
 echo "File uploading failed.\n";
 }
-//Проверка изображения на наличие скриптов и всякой другой хуйни
+//РџСЂРѕРІРµСЂРєР° РёР·РѕР±СЂР°Р¶РµРЅРёСЏ РЅР° РЅР°Р»РёС‡РёРµ СЃРєСЂРёРїС‚РѕРІ Рё РІСЃСЏРєРѕР№ РґСЂСѓРіРѕР№ С…СѓР№РЅРё
 //end
 
 mysql_query("   INSERT INTO courses (name,description,pass) 
-                VALUES ('" .$name. "','" .$description. "','" .$pass. "')
-            ");
+                VALUES ('" .$name. "','" .$description. "','" .$pass. "') "); */
+//echo $_SESSION['compname'];                
+//header("location: http://improvy.ru/$_SESSION['compname']");
+//exit();

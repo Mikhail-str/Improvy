@@ -1,5 +1,5 @@
 <?php
-	
+	session_start();
 	include 'db.php';
 	//echo $name;
 	$password = $_POST['password'];
@@ -13,7 +13,7 @@
         			setcookie ("hash", $val,time() + 50000,'/');
         			setcookie ("id", $row['id_company'],time() + 50000,'/');
         			//$rez = mysql_query("SELECT * FROM `users` WHERE `pass`='$pass'");
-					session_start();
+					
 					$_SESSION['id'] = $row['id_company'];
 					$_SESSION['name'] = $row['compname_eng'];
 					

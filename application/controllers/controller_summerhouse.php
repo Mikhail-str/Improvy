@@ -1,11 +1,11 @@
 <?php
 
-include "application/models/model_company.php";
+include "application/models/model_summerhouse.php";
 class Controller_Summerhouse extends Controller{
     
     function __construct(){
         
-        $this->model = new Model_Company();
+        $this->model = new Model_Summerhouse();
         $this->view = new View();
     }
     function action_index() {
