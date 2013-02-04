@@ -78,7 +78,7 @@
                                          WHERE  `companies`.`id_company` = $compid ");
                         }                               
                         echo '<form name="frm" method="POST">';
-                        echo '<input type="submit" value="Редактировать!" class="button_edit_textarea" >';
+                        echo '<input type="submit" value="Редактировать!" class="button_edit_textarea" >';                        
                         //Вывод из базы данных 
                         echo $text_description."<br/>"; 
                         //Флаг для смены окна
@@ -100,7 +100,10 @@
                 }
                 else{
                     echo '<form name="frm" method="POST">';
-                    echo '<input type="submit" value="Редактировать!" class="button_edit_textarea" >';
+                    if (isset($_SESSION['id']))
+                    {                        
+                        echo '<input type="submit" value="Редактировать!" class="button_edit_textarea" >';
+                    }
                     //Вывод из базы данных 
                     echo $text_description."<br/>"; 
                     //Флаг для смены окна
@@ -197,38 +200,58 @@
             <div class="accordion-heading" >            
                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseNew" id="APM">
                 <div class="new_coorse_add_button">
-                    <img id="PM" src="images/png/new_coorse_add_new.png">
+                    <img id="PM" src="images/png/new_coorse_add_new.png"/>
                 </div>                      
                 </a>                      
              </div>                             
               <div id="collapseNew" class="accordion-body collapse">
                   <div class="accordion-inner" style="background: #f5f5f5;">                                  
-                      <form class="form-horizontal" method="POST" action="php/new_course.php" id="regForm" name="form_new_course">
+                      <form class="form-horizontal" method="POST" action="" id="regForm" name="form_new_course">
                         <div class="control-group">
                             <label class="control-label">Название курса</label>
                             <div class="controls">
-                            <input type="text" id="inputname" placeholder="Название курса" name="name_new_course">
+                            <input type="text" id="name_new_course" placeholder="Название курса" name="name_new_course"/></input>
                             </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label">Тип курса</label>
                             <div class="controls">
-                                <select name="type__new_course" id="select">
+                                <select name="type_new_course" id="type_new_course">
+                                        <option value="">Выберите тип курса</option>
+                                    <?php
+                                        $type_course = mysql_query("
+                                            SELECT id_type, name 
+                                            FROM  `type` 
+                                        ");
+                                        while($row = mysql_fetch_array($type_course)) 
+                                        {
+                                        echo ('                                         
+                                            <option value="'.$row["id_type"].'">'.$row["name"].'</option>
+                                            ');
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label class="control-label">Подтип курса</label>
+                            <div class="controls">
+                                <select name="under_type_new_course" id="under_type_new_course">
+                                    <option value="">Выберите подтип курса</option>
                                     <?php
                                     echo ('                               
-                                    <option value="">Выберите тип курса</option>
                                     <option value="komen">Английский язык</option>
-                                    <option value="pioner">Фото</option>
-                                    <option value="krest">Качалка ёпт</option>
                                     ')
                                     ?>
                                 </select>
                             </div>
                         </div>
+                        
                         <div class="control-group">
                             <label class="control-label">Описание</label>
                             <div class="controls">
-                                <textarea class="textarea1" id="inputDescription" placeholder="Введите описание курса" name="description_new_course" style="width: 460px; height: 170px"></textarea>                             
+                                <textarea class="textarea1" id="description_new_course" placeholder="Введите описание курса" name="description_new_course" style="width: 460px; height: 170px"></textarea>                             
                             </div>
                                 <script>
 			                         $('.textarea1').wysihtml5();
@@ -241,13 +264,13 @@
                             <div class="controls" id="new_course_text">
                                 <div class="type_file">
                                     <input type="text" class="inputFileVal" readonly="readonly" id="fileName" />
-                                    <input type="file" size="35" class="inputFile" onchange='document.getElementById("fileName").value=this.value' name="image_new_course_local"/>
+                                    <input type="file" size="35" class="inputFile" id="image_new_course_local" onchange='document.getElementById("fileName").value=this.value' name="image_new_course_local"/>
                                     <div class="fonTypeFile" >
-                                    <input type="button" class="btn" onclick="document.forms['form_new_course']['image_new_course_local'].click()" value="Обзор">
+                                    <input type="button" class="btn"  onclick="document.forms['form_new_course']['image_new_course_local'].click()" value="Обзор">
                                     </div>
                                 </div>
                                 <br/>или добавьте ссылку на картинку <br/>
-                                <input type="text" id="inputImage" placeholder="Ссылка" name="image_new_course_link">
+                                <input type="text" id="image_new_course_link" placeholder="Ссылка" name="image_new_course_link"></input>
                                 
                             </div>
                         </div>
@@ -288,20 +311,20 @@
                                     ');*/
                                     ?>
                                 <br />или добавьте новое место проведения курса<br />
-                                <input type="text" id="inputname" placeholder="Название, если есть" name="name_new_venue">
-                                <input type="text" id="inputname" placeholder="Город" name="countre_adress_new_venue">
-                                <input type="text" id="inputname" placeholder="Контактный телефон" name="phone_new_venue">
-                                <input type="text" id="inputname" placeholder="Улица" name="street_adress_new_venue">
-                                <input type="text" id="inputname" placeholder="Метро" name="metro_new_venue">
-                                <input type="text" id="inputname" placeholder="Дом" name="home_adress_new_venue">
-                                <input type="text" id="inputname" placeholder="Как найти" name="found_adress_new_venue">
-                                <input type="text" id="inputname" placeholder="Корпус" name="corpus_adress_new_venue">
+                                <input type="text" id="name_new_venue" placeholder="Название, если есть" name="name_new_venue">
+                                <input type="text" id="countre_adress_new_venue" placeholder="Город" name="countre_adress_new_venue">
+                                <input type="text" id="phone_new_venue" placeholder="Контактный телефон" name="phone_new_venue">
+                                <input type="text" id="street_adress_new_venue" placeholder="Улица" name="street_adress_new_venue">
+                                <input type="text" id="metro_new_venue" placeholder="Метро" name="metro_new_venue">
+                                <input type="text" id="home_adress_new_venue" placeholder="Дом" name="home_adress_new_venue">
+                                <input type="text" id="found_adress_new_venue" placeholder="Как найти" name="found_adress_new_venue">
+                                <input type="text" id="corpus_adress_new_venue" placeholder="Корпус" name="corpus_adress_new_venue">
                                 
                                 
                             </div>
                         </div>   
                     <p>Новый курс будет добавлен сразу после проверки модератором
-                            <input type="submit" class="btn" value="Добавить"></p>
+                            <input class="btn" value="Добавить" id="badd"/></p>
                             
                           
 
