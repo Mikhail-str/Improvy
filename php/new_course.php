@@ -23,21 +23,22 @@ include 'db.php';
 $company_new_course = $_SESSION['id'];
 
 
-$name = $_POST['name_new_course'];
-$name_eng = translit($name);
+$name_new_course = $_POST['name_new_course'];
+$name_eng = translit($name_new_course);
 $description = $_POST['description_new_course'];
 
-$type = $_POST['type_new_course'];
+$type_new_course = $_POST['type_new_course'];
 $image_link = $_POST['image_new_course_link'];
 $image_local = $_POST['image_new_course_local'];
+
 if (!isset($_POST['name_new_course'])) 
 {
    echo(" <script>alert('Добрый день')</script>");
-
 }
 
 
 $name_new_venue = $_POST['name_new_venue'];
+$name_eng_new_venue = translit($name_new_venue);
 $phone_new_venue = $_POST['phone_new_venue'];
 $metro_new_venue = $_POST['metro_new_venue'];
 $found_adress_new_venue = $_POST['found_adress_new_venue'];
@@ -51,14 +52,7 @@ $corpus_adress_new_venue = $_POST['corpus_adress_new_venue'];
 $link_geocoder =    "город ".$countre_adress_new_venue.
                     " улица ".$street_adress_new_venue.
                     " дом ".$home_adress_new_venue.
-                    " корпус ".$corpus_adress_new_venue ;
-        
-//echo $link_geocoder;
-
-
-
-
-
+                    " корпус ".$corpus_adress_new_venue ;       
 $adress = $link_geocoder;
 $key = "ACaQDlEBAAAADx8EBAIAVvmKSReS9YyV0-V0wOJcrlmSxgIAAAAAAAAAAABvYWqTFI1UJvu1H3wCMja4lQhHDA==";
 $adress1=urlencode($adress);
@@ -69,8 +63,7 @@ $coordinate=str_replace(' ',', ',trim(strip_tags($point[1])));
 //echo "<br>".$coordinate;
 
 
-
-$result = mysql_query("
+$result_new_course = mysql_query("
                INSERT INTO  `improvy`.`venues` (
                 `id_venue` ,
                 `id_company` ,
@@ -87,7 +80,7 @@ $result = mysql_query("
                 VALUES (
                     NULL , 
                     '$company_new_course', 
-                    '$name_eng',
+                    '$name_eng_new_venue',
                     '$name_new_venue',  
                     '$phone_new_venue',  
                     '$metro_new_venue',  
@@ -96,15 +89,37 @@ $result = mysql_query("
                     '$home_adress_new_venue',  
                     '$corpus_adress_new_venue',
                     '$coordinate'
-);
+    );
 ");
 
-if($result){
-    echo "1";
-}
-else {
-    die(mysql_error());
-}
+$result = mysql_query("
+                        INSERT INTO  `improvy`.`courses` (
+                        `id_course` ,
+                        `id_venue` ,
+                        `coursename_eng` ,
+                        `coursename_rus` ,
+                        `type` ,
+                        `description` ,
+                        `price` ,
+                        `time_start` ,
+                        `time_end` ,
+                        `activation`
+                        )
+                        VALUES (
+                        NULL ,  
+                        '1',  
+                        '$name_new_course',  
+                        '$name_eng',  
+                        '$type_new_course',  
+                        '$description',  
+                        '123',  
+                        '2013-02-26',  
+                        '2013-02-22',  
+                        '1'
+                        );
+");
+
+
 
 /**
  * echo "

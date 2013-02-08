@@ -237,7 +237,7 @@
                         <div class="control-group">
                             <label class="control-label">Подтип курса</label>
                             <div class="controls">
-                                <select name="under_type_new_course" id="under_type_new_course">
+                                <select name="sub_new_course" id="sub_type_new_course">
                                     <option value="">Выберите подтип курса</option>
                                     <?php
                                     echo ('                               
@@ -263,10 +263,10 @@
                             </label>
                             <div class="controls" id="new_course_text">
                                 <div class="type_file">
-                                    <input type="text" class="inputFileVal" readonly="readonly" id="fileName" />
-                                    <input type="file" size="35" class="inputFile" id="image_new_course_local" onchange='document.getElementById("fileName").value=this.value' name="image_new_course_local"/>
+                                    <input type="text" class="inputFileVal" readonly="readonly" id="fileName" /></input>
+                                    <input type="file" size="35" class="inputFile" id="image_new_course_local" onchange='document.getElementById("fileName").value=this.value' name="image_new_course_local"/></input>
                                     <div class="fonTypeFile" >
-                                    <input type="button" class="btn"  onclick="document.forms['form_new_course']['image_new_course_local'].click()" value="Обзор">
+                                    <input type="button" class="btn"  onclick="document.forms['form_new_course']['image_new_course_local'].click()" value="Обзор"></input>
                                     </div>
                                 </div>
                                 <br/>или добавьте ссылку на картинку <br/>
@@ -280,25 +280,31 @@
                                 
                             </label>
                             <div class="controls" id="new_course_text">
-                               
+                               <div class="address_new_course" id="address_new_course">
                                     <?php
-                                    echo ('
-                                    <label class="checkbox inline">
-                                        <input type="checkbox" id="inlineCheckbox1" value="option1"> Зал на Комендантском
-                                    </label><br />
-                                    <label class="checkbox inline">
-                                        <input type="checkbox" id="inlineCheckbox2" value="option2"> Зал на Пионерской
-                                    </label><br />
-                                    <label class="checkbox inline">
-                                        <input type="checkbox" id="inlineCheckbox3" value="option3"> Зал на Крестовском
-                                    </label><br />     
-                                    <label class="checkbox inline">
-                                        <input type="checkbox" id="inlineCheckbox3" value="option3"> Зал на Ваське
-                                    </label><br />
-                                    <label class="checkbox inline">
-                                        <input type="checkbox" id="inlineCheckbox3" value="option3"> Зал в ПУНКе
-                                    </label><br />
-                                    ');                          
+                                    global $routes ;
+                                    $name_companies =  $routes[1];
+                                    
+                                    $id_companies = $_SESSION['id']; 
+                                    $venue_id = mysql_query("
+                                        SELECT  `venues`.`venuename_rus` as p1 ,  `venues`.`id_venue` as p2 ,  `companies`.`compname_eng`
+                                        FROM  `venues` 
+                                        JOIN  `companies` ON  `venues`.`id_company` =  `companies`.`id_company` 
+                                        WHERE  `companies`.`compname_eng` =  '$name_companies'                                 
+                                        ");
+                                        $ii = 1;
+                                    echo '<div id="venue_checkbox_div">'; 
+                                    while($row1 = mysql_fetch_array($venue_id)) 
+                                    {
+                                        echo ('
+                                        <label class="checkbox inline">
+                                            <input type="checkbox" id="venues_id'.$ii.'" id="venue_check_div" name = "venues_id" value="'.$row1["p2"].'">'.$row1["p1"].'
+                                        </label><br />                                      
+                                        ');  
+                                        $ii=$ii+1; 
+                                     
+                                    }
+                                    echo '</div>';
                                     /*echo ('
                                     <select name="location_new_course" id="select" multiple="multiple">
                                         <option value="">Выберите адрес</option>
@@ -310,15 +316,16 @@
                                     </select>
                                     ');*/
                                     ?>
+                               </div>
                                 <br />или добавьте новое место проведения курса<br />
-                                <input type="text" id="name_new_venue" placeholder="Название, если есть" name="name_new_venue">
-                                <input type="text" id="countre_adress_new_venue" placeholder="Город" name="countre_adress_new_venue">
-                                <input type="text" id="phone_new_venue" placeholder="Контактный телефон" name="phone_new_venue">
-                                <input type="text" id="street_adress_new_venue" placeholder="Улица" name="street_adress_new_venue">
-                                <input type="text" id="metro_new_venue" placeholder="Метро" name="metro_new_venue">
-                                <input type="text" id="home_adress_new_venue" placeholder="Дом" name="home_adress_new_venue">
-                                <input type="text" id="found_adress_new_venue" placeholder="Как найти" name="found_adress_new_venue">
-                                <input type="text" id="corpus_adress_new_venue" placeholder="Корпус" name="corpus_adress_new_venue">
+                                <input type="text" id="name_new_venue" placeholder="Название, если есть" name="name_new_venue"></input>
+                                <input type="text" id="countre_adress_new_venue" placeholder="Город" name="countre_adress_new_venue"></input>
+                                <input type="text" id="phone_new_venue" placeholder="Контактный телефон" name="phone_new_venue"></input>
+                                <input type="text" id="street_adress_new_venue" placeholder="Улица" name="street_adress_new_venue"></input>
+                                <input type="text" id="metro_new_venue" placeholder="Метро" name="metro_new_venue"></input>
+                                <input type="text" id="home_adress_new_venue" placeholder="Дом" name="home_adress_new_venue"></input>
+                                <input type="text" id="found_adress_new_venue" placeholder="Как найти" name="found_adress_new_venue"></input>
+                                <input type="text" id="corpus_adress_new_venue" placeholder="Корпус" name="corpus_adress_new_venue"></input>
                                 
                                 
                             </div>

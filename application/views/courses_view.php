@@ -45,11 +45,11 @@
 
   <h3><li><a href="dance">Танцы</a></li></h3>
   <ul class="nav nav-list">
-                    <li><a href="club-dance">Клубные танцы</a></li>
+                    <li><a href="clubdance">Клубные танцы</a></li>
                     <li><a href="hiphop">Hip-Hop</a></li>
-                    <li><a href="bal-dance">Бальные танцы</a></li>
-                    <li><a href="child-dance">Детские танцы</a></li>
-                    <li><a href="belly-dance">Танец живота</a></li>
+                    <li><a href="baldance">Бальные танцы</a></li>
+                    <li><a href="childdance">Детские танцы</a></li>
+                    <li><a href="bellydance">Танец живота</a></li>
                     <li><a href="tango">Танго</a></li>
   </ul>
 

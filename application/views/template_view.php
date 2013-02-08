@@ -186,7 +186,7 @@
   ?>
 	<body >    
         <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-          <div class="modal-header">
+          <div class="modal-header" id="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             <h3 id="myModalLabel">ImprovY</h3>
           </div>
@@ -206,7 +206,7 @@
                       </div>
                       <div class="control-group">
                         <div class="controls">                          
-                          <button class="btn btn-primary" type="button" id="ent" href='#'>Войти</button>                                                 
+                          <button class="btn btn-primary" type="submit" id="ent" href='#'>Войти</button>                                                 
                         </div>
                       </div>                      
                 </form>
