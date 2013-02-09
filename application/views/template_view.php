@@ -171,7 +171,7 @@
 	</head>
         
         
-	</head>
+	
   <?php
   /*  session_start();
     include '/php/db.php';
