@@ -94,7 +94,14 @@
                                             </td>
                                             <td>
                                             <div class='price_course'>
-                                                    price".$row['price']."
+                                            ");
+                                            if ($row['minprice']!='0')
+                                            echo "
+                                            <div class='price_course'>
+                                                    от ".$row['minprice']." рублей
+                                            </div>";
+                                            echo ("
+                                                    
                                             </div>
                                             </td>
                                             </tr></table>

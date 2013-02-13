@@ -28,7 +28,9 @@ $name_new_course = $_POST['name_new_course'];
 $name_eng = translit($name_new_course);
 $description = $_POST['description_new_course'];
 $venues_checked = $_POST['venues_checked'];
-
+$price_new_course = $_POST['price_new_course'];
+$minprice_new_course = $_POST['minprice_new_course'];
+$timetable_new_course = $_POST['timetable_new_course'];
 $type_new_course = $_POST['type_new_course'];
 $subtype_new_course = $_POST['subtype_new_course'];
 $image_link = $_POST['image_new_course_link'];
@@ -47,6 +49,8 @@ $result = mysql_query("
                         `subtype` ,
                         `description` ,
                         `price` ,
+                        `minprice` ,
+                        `timetable` ,
                         `time_start` ,
                         `time_end` ,
                         `activation`
@@ -59,7 +63,9 @@ $result = mysql_query("
                         '$type_new_course',
                         '$subtype_new_course',  
                         '$description',  
-                        '123',  
+                        '$price_new_course',
+                        '$minprice_new_course',
+                        '$timetable_new_course',  
                         '2013-02-26',  
                         '2013-02-22',  
                         '1'

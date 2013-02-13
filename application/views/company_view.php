@@ -60,8 +60,10 @@
             
      
         </form>
-        
-        
+        <?php
+        if (isset($_SESSION['id']))
+        {
+            echo '
          <a href="#modal_new_venue" role="button" class="btn btn-primary" data-toggle="modal">Добавить адрес</a>
          
         <!-- Modal -->
@@ -131,29 +133,9 @@
           </form> 
         </div>
         <!-- Modal_1_end -->
-        
-        
-        <!-- Modal_2 -->
-        <div id="modal_preview_maps" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="myModalLabel">Modal header</h3>
-          </div>
-          <div class="modal-body">
-            <!-- Этот блок кода нужно вставить в ту часть страницы, где вы хотите разместить карту (начало) -->
-            <div id="ymaps-map-id_2" class="modal_map" style="width: 450px; height: 350px;"></div>
-            <script type="text/javascript" src="http://api-maps.yandex.ru/2.0-stable/?lang=ru-RU&coordorder=longlat&load=package.full&wizard=constructor&onload=fid_2"></script>
-            <!-- Этот блок кода нужно вставить в ту часть страницы, где вы хотите разместить карту (конец) -->
-
-          </div>
-          <div class="modal-footer">
-            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-            <button class="btn btn-primary">Save changes</button>
-          </div>
-        </div>
-        
-        <!-- Modal_2_end -->
-
+        ';
+        }
+        ?>
         
         
     </div>
@@ -268,10 +250,13 @@
                                                 </span>                                    
                                             </div>
                                             </td>
-                                            <td>
+                                            <td>");
+                                            if ($row['minprice']!='0')
+                                            echo "
                                             <div class='price_course'>
-                                                    price".$row['price']."
-                                            </div>
+                                                    от ".$row['minprice']." рублей
+                                            </div>";
+                                            echo ("
                                             </td>
                                             </tr></table>
                                         </div>                                                                               
@@ -302,8 +287,10 @@
                                 ");
                 ?>
              
-                
-
+        <?php                
+        if (isset($_SESSION['id']))
+        {
+            echo('
         <div class="accordion-group">
             <div class="accordion-heading" >            
                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseNew" id="APM">
@@ -325,8 +312,8 @@
                             <label class="control-label">Тип курса</label>
                             <div class="controls">
                                 <select name="type_new_course" id="type_new_course">
-                                        <option value="">Выберите тип курса</option>
-                                    <?php
+                                        <option value="">Выберите тип курса</option>');
+                                    
                                         $type_course = mysql_query("
                                             SELECT id_type, name 
                                             FROM  `type` 
@@ -337,7 +324,7 @@
                                             <option value="'.$row["id_type"].'">'.$row["name"].'</option>
                                             ');
                                         }
-                                    ?>
+                                    echo ('
                                 </select>
                             </div>
                         </div>
@@ -352,26 +339,55 @@
                             </div>
                         </div>
                         
-                        <div class="control-group">
+                         <div class="control-group">
                             <label class="control-label">Описание</label>
                             <div class="controls">
                                 <textarea class="textarea1" id="description_new_course" placeholder="Введите описание курса" name="description_new_course" style="width: 460px; height: 170px"></textarea>                             
                             </div>
-                                <script>
-			                         $('.textarea1').wysihtml5();
+                            <script>
+		                         $(".textarea1").wysihtml5();
+                            </script>
+                        </div> 
+                        
+                        <div class="control-group">
+                            <label class="control-label">Укажите информацию о цене</label>
+                            <div class="controls">
+                                <textarea class="textarea2" id="price_new_course" placeholder="Информация о цене" name="price_new_course" style="width: 460px; height: 170px"></textarea>
+                            </div>
+                            <script>
+		                         $(".textarea2").wysihtml5();
+                            </script>
+                        </div>
+                        
+                         <div class="control-group">
+                            <label class="control-label">Минимальная цена курса за месяц(в рублях)</label>
+                            <div class="controls">
+                            <input type="text" id="minprice_new_course" placeholder="Название курса" name="minprice_new_course"/></input>
+                            </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label class="control-label">Укажите информацию о дате и времени </label>
+                            <div class="controls">
+                                <textarea class="textarea3" id="timetable_new_course" placeholder="Расписание" name="timetable_new_course" style="width: 460px; height: 170px"></textarea>
+                                 <script>
+    		                         $(".textarea3").wysihtml5();
                                 </script>
-                        </div>                        
+                            </div>                           
+                        </div>
+                        
+                                              
                         <div class="control-group">
                             <label class="control-label" for="inputImageCourse">
                                 Выберите картинку<br/>Внимание!Картинка должна быть формата 200px*700px
                             </label>
                             <div class="controls" id="new_course_text">
                                 <div class="type_file">
-                                    <input type="text" class="inputFileVal" readonly="readonly" id="fileName" /></input>
-                                    <input type="file" size="35" class="inputFile" id="image_new_course_local" onchange='document.getElementById("fileName").value=this.value' name="image_new_course_local"/></input>
-                                    <div class="fonTypeFile" >
-                                    <input type="button" class="btn"  onclick="document.forms['form_new_course']['image_new_course_local'].click()" value="Обзор"></input>
-                                    </div>
+                                    <input type="text" class="inputFileVal" readonly="readonly" id="fileName" /></input>');
+                                    echo "<input type='file' size='35' class='inputFile' id='image_new_course_local' onchange='document.getElementById('fileName').value=this.value' name='image_new_course_local'/></input>
+                                    <div class='fonTypeFile' >
+                                    <input type='button' class='btn'  onclick='document.forms['form_new_course']['image_new_course_local'].click()' value='Обзор'></input>";
+                                    echo '</div>
                                 </div>
                                 <br/>или добавьте ссылку на картинку <br/>
                                 <input type="text" id="image_new_course_link" placeholder="Ссылка" name="image_new_course_link"></input>
@@ -386,7 +402,7 @@
                             <div class="controls" id="new_course_text">
                                 <div class="address_new_course" id="address_new_course">
                                     
-                                    <?php
+                                    ';
                                     
                                     
                                     
@@ -398,19 +414,18 @@
                                         WHERE  `companies`.`compname_eng` =  '$name_companies'                                 
                                         ");
                                         $ii = 1;
-                                    echo '<div id="venue_checkbox_div"><label class="checkbox inline">'; 
+                                    echo '<div id="venue_checkbox_div">'; 
                                     while($row1 = mysql_fetch_array($venue_id)) 
                                     {
                                         echo ('
                                         
-                                            <input type="checkbox" id="venues_id'.$ii.'" id="venue_check_div" name = "venues_id" value="'.$row1["p2"].'">'.$row1["p1"].'
-                                        <br />                                      
+                                            <label class="checkbox inline" style="width: 170px !important;"><input type="checkbox" id="venues_id'.$ii.'" id="venue_check_div" name = "venues_id" value="'.$row1["p2"].'">'.$row1["p1"].'</label><br>                                                                             
                                         ');  
                                         $ii=$ii+1; 
                                      
                                     }
-                                    echo '</label></div>';
-                                    ?>
+                                    echo '</div>
+                                    
                                     
                                </div>                                
                                  
@@ -430,7 +445,7 @@
                     </form>
                 </div>
             </div>
-
+            ';}?>
         </div>
     </div>
 </div>      
