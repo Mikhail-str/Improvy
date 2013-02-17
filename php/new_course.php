@@ -37,12 +37,9 @@ $image_link = $_POST['image_new_course_link'];
 $image_local = $_POST['image_new_course_local'];
 
 
-foreach ($venues_checked as $key => $value) {
-
 $result = mysql_query("
                         INSERT INTO  `improvy`.`courses` (
                         `id_course` ,
-                        `id_venue` ,
                         `coursename_rus` ,
                         `coursename_eng` ,
                         `type` ,
@@ -56,8 +53,7 @@ $result = mysql_query("
                         `activation`
                         )
                         VALUES (
-                        NULL ,  
-                        '$value',  
+                        NULL ,    
                         '$name_new_course',  
                         '$name_eng',  
                         '$type_new_course',
@@ -71,7 +67,20 @@ $result = mysql_query("
                         '1'
                         );
 ");
+$last_id = mysql_query(" select max(`courses`.`id_course`) as id_course   from `courses`");
+while($row = mysql_fetch_array($last_id))
+                    { 
+                        $last_id_course = $row["id_course"];
+                    }
+foreach ($venues_checked as $key => $value) 
+{
+    echo $value.'<br />';
+    mysql_query(" INSERT INTO `improvy`.`cv` (`id_venue`, `id_course`) 
+                                    VALUES ('$value', '$last_id_course');   
+");
 }
+
+
 /*
 //Проверка изображения на наличие скриптов и всякой другой 
 if($_FILES["filename"]["size"] > 1024*3*1024)

@@ -155,8 +155,6 @@
                     $text_description =  $row['about'];
                 }
                 if (isset($_POST['action'])) {
-                      
-                   
                     if (!($_POST['action']=='2'))    {                 
                         if (($_POST['action_save']=='1'))    {
                             //Запись в базу данных
@@ -167,13 +165,13 @@
                                          SET  `about` = '$text_description' 
                                          WHERE  `companies`.`id_company` = $compid ");
                         }                               
-                        echo '<form name="frm" method="POST">';
-                        echo '<input type="submit" value="Редактировать!" class="button_edit_textarea" >';                        
+                        echo '<form name="frm" method="POST">
+                                <input type="submit" value="Редактировать!" class="button_edit_textarea" >';                        
                         //Вывод из базы данных 
                         echo $text_description."<br/>"; 
                         //Флаг для смены окна
-                        echo '<input type="hidden" name="action" value=2>';
-                        echo '</form>';                            				
+                        echo '<input type="hidden" name="action" value=2>
+                              </form>';                            				
                     }
                     else {   
                         echo '<form name="frm" method="POST">';
@@ -275,13 +273,13 @@
                     } else echo("<div class='accordion-group'>
                                     <div class='accordion-heading' >
                                     <a class='accordion-toggle' data-toggle='collapse' data-parent='#accordion2' href='#collapse2'>
-                                        Следуйте указаниям ниже, чтобы добавить первый курс.
+                                        Нажимите на + и следуйте указаниям ниже, чтобы добавить Ваш первый курс.
                                     </a>
                                     </div>
                                  </div>
                                  <div id='collapse2' class='accordion-body collapse'>
                                      <div class='accordion-inner'> 
-                                          хуй вам
+                                          Здесь можно разместить информацию о правильности размещения курсов
                                      </div>
                                  </div>
                                 ");

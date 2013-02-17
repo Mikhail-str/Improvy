@@ -68,31 +68,86 @@
                         //echo "<br>".$i."name_rus=".$row['name_rus'];
                         //echo "<br>".$i."price=".$row['price'];
                         //echo "<br>".$i."description=".$row['description'];
+                        $name_course_eng = $row['coursename_eng'];
+                        $name_companies_eng =  $row['compname_eng'];
                         echo (" <div class='accordion-group'>                        
                                     <div class='accordion-heading' >
                                         <div class='accordion-toggle' data-toggle='collapse' data-parent='#accordion2' data-target='#collapse".$i."'>                                            
                                             
                                             <table class = 'table_course'><tr>
-                                            <td width = '150px'>
+                                            <td width = '20%'>
                                             <div class = 'picture_course'>
                                                 <a href=/".$row['compname_eng']."/".$row['coursename_eng'].">
                                                     <img src='../images/1.jpg'/>
                                                 </a>
                                             </div>
                                             </td>
-                                            <td>
-                                            <div class='name_course'>
-                                                <span class='page-header'> 
-                                                    <h4>
-                                                        <a href=/".$row['compname_eng']."/".$row['coursename_eng'].">".$row['coursename_rus']."</a>
-                                                    </h4>
-                                                    <p>
-                                                        <small>".$row['compname_rus']."</small>
-                                                    </p>
-                                                </span>                                    
-                                            </div>
+                                            <td width = '40%'>
+                                                <div class='name_course'>
+                                                    <span class='page-header'> 
+                                                        <h4>
+                                                            <a href=/".$row['compname_eng']."/".$row['coursename_eng'].">".$row['coursename_rus']."</a>
+                                                        </h4>
+                                                        <p>
+                                                            <small>".$row['compname_rus']."</small>
+                                                        </p>
+                                                    </span>                                    
+                                                </div>
                                             </td>
-                                            <td>
+                                            
+                                            <td width = '25%'>
+                                                <div class='location_courses'>
+                                                    <span class='page-header'> 
+                                                        <ul class='unstyled'>");
+                                                                                                     $info_address_course = mysql_query(" 
+                                                                                                        SELECT  `venues`.`venuename_rus`, 
+                                                                                                                `venues`.`phone`, 
+                                                                                                                `venues`.`metro`, 
+                                                                                                                `venues`.`country`, 
+                                                                                                                `venues`.`street`, 
+                                                                                                                `venues`.`home`, 
+                                                                                                                `venues`.`corpus`, 
+                                                                                                                `venues`.`how_found`, 
+                                                                                                                `venues`.`coordinate`
+                                                                                                        FROM `courses` 
+                                                                                                           join `cv` on `courses`.`id_course` = `cv`.`id_course` 
+                                                                                                           join `venues` on `cv`.`id_venue` = `venues`.`id_venue`                       
+                                                                                                           join `companies` on `companies`.`id_company`=`venues`.`id_company`
+                                                                                                        where   `courses`.`coursename_eng` = '$name_course_eng' and 
+                                                                                                                `companies`.`compname_eng` =  '$name_companies_eng'
+                                                                                                        ");
+                                                                                                        $info_address_course_count = mysql_query(" 
+                                                                                                            SELECT  count(*) as p
+                                                                                                            FROM `courses` 
+                                                                                                               join `cv` on `courses`.`id_course` = `cv`.`id_course` 
+                                                                                                               join `venues` on `cv`.`id_venue` = `venues`.`id_venue`                       
+                                                                                                               join `companies` on `companies`.`id_company`=`venues`.`id_company`
+                                                                                                            where   `courses`.`coursename_eng` = '$name_course_eng' and 
+                                                                                                                    `companies`.`compname_eng` =  '$name_companies_eng'
+                                                                                                            ");
+                                                                                                        while($row1 = mysql_fetch_array($info_address_course_count))
+                                                                                                        {
+                                                                                                            $count = $row1['p'] - 3;
+                                                                                                        }
+                                                                                                        $i = 0;
+                                                                                                        while($row2 = mysql_fetch_array($info_address_course))
+                                                                                                        {
+                                                                                                            $i = $i+1;
+                                                                                                            if (($i>3)&&($count!=1))
+                                                                                                            {
+                                                                                                                echo "<li>и еще ".$count." других мест</li>";
+                                                                                                                break;
+                                                                                                            }
+                                                                                                            echo "<li>".$row2['venuename_rus']."</li>";
+                                                                                                            
+                                                                                                        }
+                                                            echo ("
+                                                        </ul>
+                                                    </span>                                    
+                                                </div>
+                                            </td>
+                                            
+                                            <td width = '15%'>
                                             <div class='price_course'>
                                             ");
                                             if ($row['minprice']!='0')

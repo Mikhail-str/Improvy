@@ -6,7 +6,7 @@ html,body{
     min-height: 100%;
    }
 .pad{
-    padding-top: 40px;
+    padding-top: 55px;
 }
 /*header{
     margin-bottom: 40px;
@@ -203,10 +203,12 @@ border-width: 1px;
             }
             .name_course {
                 float:left;
+                width: 250px;
+                padding: 5px;
             }
             .name_course a, {
-            text-decoration: none;
-            color:#0381cb;
+                text-decoration: none;
+                color:#0381cb;
             }
             .name_course a:hover {
                 text-decoration: none;
@@ -215,7 +217,7 @@ border-width: 1px;
             .price_course {
                 color:#e28768;
                 text-align:right;
-                padding: 5px 10px 5px 10px;
+                margin: 5px 10px 5px 10px;
             }
             .description_course {
                 word-wrap: break-word;
@@ -223,7 +225,9 @@ border-width: 1px;
             .controls file {
                 
             }
-            
+            .location_courses{
+                float:left;
+            }
 
             
             .type_file { /* блок-родитель, внутри которого будут позиционироваться остальные элементы для реализации стильного поля выбора файлов */
@@ -255,5 +259,15 @@ border-width: 1px;
                 background: none;
                 border: none;
             }
-        
+        .icon-remove_button{
+            float:right; 
+            opacity:0.4;
+            
+        }
+        .icon-remove_button:hover{
+            opacity:1;
+        }
+        .margino{
+            margin: 0px !important;
+        }
 

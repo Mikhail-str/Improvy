@@ -12,9 +12,11 @@ class Model_Company extends Model{
                                   where companies.compname_eng = '$routes[1]'"); 
             if (!isset($location))
             {
-                $data2 = mysql_query(" SELECT distinct compname_eng, coursename_eng, coursename_rus, compname_rus, minprice, description FROM companies
-					                   JOIN venues on companies.id_company = venues.id_company
-                                       JOIN courses on venues.id_venue = courses.id_venue
+                $data2 = mysql_query(" SELECT distinct compname_eng, coursename_eng, coursename_rus, compname_rus, minprice, description 
+                                        FROM `courses` 
+                                                   join `cv` on `courses`.`id_course` = `cv`.`id_course` 
+                                                   join `venues` on `cv`.`id_venue` = `venues`.`id_venue`                       
+                                                   join `companies` on `companies`.`id_company`=`venues`.`id_company` 
                                        where companies.compname_eng = '$routes[1]'
 			                         ");
             } else {

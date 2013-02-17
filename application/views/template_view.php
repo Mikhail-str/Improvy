@@ -100,7 +100,6 @@
                     </div>
               
         </header>
-        <br />
         <?php include 'application/views/'.$content_view; ?>
         
         <footer class="footer">
