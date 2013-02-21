@@ -76,7 +76,7 @@
         </div>
         <div class = "content">
         <header>                
-                    <div class="navbar navbar-fixed-top">
+                    <div class="navbar navbar-fixed-top navbar-inverse">
                         <div class="navbar-inner ">
                             <div class="container">
                                 <a class="brand" href="/main">ImprovY</a>
