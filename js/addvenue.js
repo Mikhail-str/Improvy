@@ -40,7 +40,7 @@ $("#button_add_venue").click(function() {
 	var found_adress_new_venue = $("#found_adress_new_venue").val();
     
 	var corpus_adress_new_venue = $("#corpus_adress_new_venue").val();
-    alert(all_data_address_correct);
+   // alert(all_data_address_correct);
     if (all_data_address_correct=='1')
         {
         $.ajax({
@@ -60,10 +60,10 @@ $("#button_add_venue").click(function() {
         			     
                         //alert(data);
         				$('#modal_new_venue').modal('hide');
-
+                       // alert(data);
                             
         				//$('#modal_preview_maps').modal('show');
-        				    location.reload();
+        				    //location.reload();
        				     //   window.location = location.href;
         					        				
                         

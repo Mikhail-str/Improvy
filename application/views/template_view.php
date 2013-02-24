@@ -9,7 +9,6 @@
 		<link href="/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
         <link href="/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
         <link href="/css/style.css" rel="stylesheet" type="text/css"/>
-        <script type="text/javascript" src="https://getfirebug.com/firebug-lite.js"></script>
         <script src="/js/jquery.js" type="text/javascript"></script>
         <script src="/js/jquery.cookie.js" type="text/javascript"></script>
         <script src="/js/code.js" type="text/javascript"></script>        
