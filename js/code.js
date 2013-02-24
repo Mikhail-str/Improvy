@@ -125,3 +125,35 @@ $(function() {
         else $("#PMI19").attr("src", src2); 
     })    
 })
+
+$(function() {
+   // alert('page');
+   var page;
+    $("#dsd li").click(function() {
+        page = $(this).text();
+       // alert(page);
+            $.ajax({
+            type: "POST",
+            url: '/php/issue.php',
+            data: {
+                "page": page
+            }
+        })
+    })
+
+       
+ })
+
+$(function() {
+    $("#inlineCheckbox1").bind("change click", function () {
+    // do something
+    if ($(this).prop("checked")) {
+        $("input:checkbox").prop("checked", false);
+    } else {
+        $("input:checkbox").prop("checked", true);
+    }
+    
+     //alert(1);
+});
+})
+

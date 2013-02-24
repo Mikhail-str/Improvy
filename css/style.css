@@ -299,3 +299,11 @@ border-width: 1px;
   line-height: 30px;
   color: inherit;
 }
+
+.navig {
+    margin: 5px;
+}
+
+.iss {
+    display: none;
+}

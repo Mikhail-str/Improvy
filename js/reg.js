@@ -49,6 +49,8 @@ $(function() {
 		var Address = $("#Address").val();
 		var Site = $("#Site").val();
 		var Phone = $("#Phone").val();
+		var logo = $("#logo").val();
+
 
 
 		if(/^[a-zA-Z0-9](([a-z0-9\-_\+\&]?)+[a-z0-9])?\@((\w([a-zA-Z0-9\-_]+\w)?\.[a-z]{2,4})|(([01]?\d\d|2[0-4]\d|25[0-5])\.([01]?\d\d|2[0-4]\d|25[0-5])\.([01]?\d\d |2[0-4]\d|25[0-5])\.([01]?\d\d|2[0-4]\d|25[0-5]))|(localhost))$/i.test(email)) {
@@ -63,7 +65,7 @@ $(function() {
 			return false;
 		}
 		////////
-		$.ajax({
+		/*$.ajax({
 			type: "POST",
 			url: '/php/registration.php',
 			data: {
@@ -87,7 +89,7 @@ $(function() {
 					//alert(data);
 				};
 			}
-		}) 
+		}) */
 
 	})
 	$("#ent").click(function() {

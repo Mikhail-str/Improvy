@@ -5,6 +5,7 @@ class Model_Courses extends Model
 
 	public function get_sport()
 	{	
+
         $data = mysql_query("SELECT distinct `courses`.`coursename_rus`, `courses`.`coursename_eng`, `courses`.`price`,`courses`.`description`, `courses`.`minprice`, `companies`.`compname_rus`,`companies`.`compname_eng`
                             FROM `courses` 
                                join `cv` on `courses`.`id_course` = `cv`.`id_course` 
@@ -16,6 +17,7 @@ class Model_Courses extends Model
 	}
     public function get_martial()
 	{	
+
         $data = mysql_query("SELECT  distinct `courses`.`coursename_rus`, `courses`.`coursename_eng`, `courses`.`price`, `courses`.`description`, `courses`.`minprice`,`companies`.`compname_rus`,`companies`.`compname_eng`
                             FROM `courses` 
                                join `cv` on `courses`.`id_course` = `cv`.`id_course` 
@@ -47,6 +49,7 @@ class Model_Courses extends Model
         return $data;
 		
 	}
+
 	public function get_dances()
 	{	
         $data = mysql_query("SELECT  distinct `courses`.`coursename_rus`, `courses`.`coursename_eng`, `courses`.`price`,`courses`.`description`, `courses`.`minprice`, `companies`.`compname_rus`,`companies`.`compname_eng`
@@ -59,6 +62,7 @@ class Model_Courses extends Model
 
         return $data;
 		
+
 	}
     public function get_data($course)
     {
@@ -69,6 +73,7 @@ class Model_Courses extends Model
                                join `companies` on `companies`.`id_company`=`venues`.`id_company`
                                 where courses.subtype = '$course' ");
             return $data;                           
+
     }
     /*public function get_yoga()
     {   
