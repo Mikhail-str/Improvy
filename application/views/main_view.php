@@ -61,22 +61,20 @@
 <br />
 
 <div class="row">
-        <div class="span4">
+    <div class="page-header"></div>
+        <div class="span6">
             
             <img src="images/icon_search.png"/>
             <span class="text-info text_icon">Курсы на любой вкус</span>
             <p> Вам больше не придется тратить много времени на поиск интересующих вас курсов или спортивных секций, бороздя просторы интернета.
                 
         </div>
-        <div class="span4">
+        <div class="span6">
             <img src="images/icon_video.png"/>
             <span class="text-info text_icon">Что это за сервис?</span>
             <p>Bounce uses free open-source fonts from Fontspring as well as the iconic Font Awesome.
         </div>
-        <div class="span4">
-            <span class="text-info text_icon"></span>
-            <p>Bounce comes with several different colors, giving you a head start on creating a unique design.
-        </div>
+        
 </div>
 </div>
 <div class = "hfooter"></div>  

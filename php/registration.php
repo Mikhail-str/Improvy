@@ -2,29 +2,85 @@
 	
 	session_start();
 	include 'db.php';
-    $Cname = $_POST['Cname'];
+    $Cname = $_POST['name'];
 	$fio = $_POST['fio'];
 	//echo $name;
 	//$pass = md5($_POST['pass']);
-	$email = $_POST['email'];
-	$address = $_POST['address'];
-	$site = $_POST['site'];
-	$phone = $_POST['phone'];
+	$email = $_POST['Email'];
+	$address = $_POST['Address'];
+	$site = $_POST['Site'];
+	$phone = $_POST['Phone'];
 	$Cname_eng = translit($Cname);
 	$password = generateCode();
+	$uploaddir = './files/';
+	$uploadfile = $uploaddir.$Cname_eng.'.jpeg';
+
+	// Копируем файл из каталога для временного хранения файлов:
 	
+	//if($_FILES['userfile']['size'] != 0 and $_FILES['userfile']['size']<=1024000) { // Здесь мы проверяем размер если он более 1 МБ 
+		//if (move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)) { // Здесь идет процесс загрузки изображения 
+			//$size = getimagesize($uploadfile); // с помощью этой функции мы можем получить размер пикселей изображения
+			// if ($size[0] < 601 && $size[1]<5001) { // если размер изображения не более 600 пикселей по ширине и не более 5000 по высоте echo "Файл загружен. Путь к файлу: 
+			//}else {
+			//	echo "Размер пикселей превышает допустимые нормы (ширина не более - 600 пикселей, высота не более 5000)"; 
+			//unlink($uploadfile); // удаление файла 
+			//} 
+		//} else {
+		//	echo "Файл не загружен, верьнитель и попробуйте еще раз";
+		//} else { 
+			//echo "Размер файла не должен превышать 1000Кб";
+		//}
+
+
 	
 	$checkEmail = mysql_fetch_array(mysql_query("SELECT `email` FROM `companies` WHERE `email`='$email'"));
 	$checkCname = mysql_fetch_array(mysql_query("SELECT `compname_rus` FROM `companies` WHERE `compname_rus`='$Cname'"));
 	if (($checkEmail['email'] != null) || ($checkCname['compname_rus'])!= null) {
 		
-		echo 1;
+		echo ("<script type='text/javascript'>  
+				  	alert('Компания с таким e-nail или названием уже зарегистрированна!')
+		 				
+				 	</script>");
 	}
 	else
-	{
-		echo 2;
-		if (mysql_query("INSERT INTO companies (compname_rus, compname_eng, fio, address, email, password, telephone, site, activation, about) VALUES ('" .$Cname. "','" .$Cname_eng. "','" .$fio. "', '" .$address. "','" .$email. "','" .$password. "', '" .$phone. "','" .$site. "', '0', 'Заполните информацию о компании')")) //пишем данные в БД и авторизовываем пользователя
+	{		
+		if($_FILES['uploadfile']['size'] != 0)
+			{
+				if ($_FILES['uploadfile']['size']<=1024000)
+				{
+				$imageinfo = getimagesize($_FILES['uploadfile']['tmp_name']);
+				 if($imageinfo['mime'] != 'image/png' && $imageinfo['mime'] != 'image/jpeg') {
+				  echo ("<script type='text/javascript'>  
+				  	alert('Картинка должна быть только формата JPEG или PNG!')
+		 				
+				 	</script>");
+				  exit;
+				 }
+				if (copy($_FILES['uploadfile']['tmp_name'], $uploadfile))
+				{
+				echo "<h3>Файл успешно загружен на сервер</h3>";
+				}
+				else { 
+					echo "<h3>Ошибка! Не удалось загрузить файл на сервер!</h3>"; 
+					exit; 
+				}
+				} else 
+				echo ("<script type='text/javascript'>  
+					  	alert('Размер не должен превышать 10Мб!')
+			 				
+					 	</script>");
+			}
+		if (mysql_query("INSERT INTO companies (compname_rus, compname_eng, fio, address, email, password, telephone, site, activation, photo) VALUES ('" .$Cname. "','" .$Cname_eng. "','" .$fio. "', '" .$address. "','" .$email. "','" .$password. "', '" .$phone. "','" .$site. "', '0','".$uploadfile."')")) //пишем данные в БД и авторизовываем пользователя
 		{
+				echo ("");
+				echo ("<script type='text/javascript'> 
+					alert('Спасибо за регистрацию, дальнейшие инструкции отправлены на ваш e-mail')
+					var a = document.createElement('a');
+					a.href='/main';
+					a.target = '_top';
+					
+					a.click();
+					</script>");
 				//setcookie ("login", $pass, time() + 50000, '/');
 				//setcookie ("password", md5($login.$password), time() + 50000, '/');
 				//$rez = mysql_query("SELECT * FROM users WHERE pass=".$pass);
@@ -125,3 +181,4 @@ function createControl($name){ //Автоматизированное добав
 
 	@mysql_close();
 ///////////////////////////////////
+?>

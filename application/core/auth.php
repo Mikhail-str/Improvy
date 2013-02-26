@@ -11,7 +11,6 @@ if(!isset($_SESSION['id'])){
 				$val = md5($row['password'].md5($row['compname_rus']));
 				if($_COOKIE['hash'] == $val){
 					$_SESSION['id'] = $row['id_company'];
-                    $_SESSION['id_company'] = $row['id_company'];
 				}
 				else{
 					setcookie("id", "", time() - 3600*24*30*12, "/");
@@ -22,4 +21,3 @@ if(!isset($_SESSION['id'])){
 	}
 }
 
-			

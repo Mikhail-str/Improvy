@@ -1,4 +1,10 @@
+<script type="text/javascript" src="/js/issue.js"></script>
 <div class="container pad">
+<ul>
+  <?php
+        $_SESSION["crumb"]= $_SERVER['REQUEST_URI'];     
+  ?>
+</ul>
     <div class="row">
         <div class="span3">
 
@@ -30,7 +36,6 @@
                                 <li><a href="smm">SMM</a></li>
                                 <li><a href="design">Дизайн</a></li>
                                 <li><a href="editing">Видеомонтаж</a></li>
-                                </ul>
               </ul>
 
               <h3><li><a href="languages">Иностранные языки</a></li></h3>
@@ -70,7 +75,7 @@
                         //echo "<br>".$i."description=".$row['description'];
                         $name_course_eng = $row['coursename_eng'];
                         $name_companies_eng =  $row['compname_eng'];
-                        echo (" <div class='accordion-group'>                        
+                        echo (" <div class='accordion-group iss'>                        
                                     <div class='accordion-heading' >
                                         <div class='accordion-toggle' data-toggle='collapse' data-parent='#accordion2' data-target='#collapse".$i."'>                                            
                                             
@@ -196,8 +201,13 @@
                  ?>
                 </div>
             </div>
+            <div class="pagination">
+  <ul id="nav_num">
+  </ul>
+</div>
+<div class = "hfooter"></div>
         </div>
     </div>
 </div>
-<div class = "hfooter"></div>
+
 </div>

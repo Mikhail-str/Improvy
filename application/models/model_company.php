@@ -8,7 +8,9 @@ class Model_Company extends Model{
             $routes = explode('/', $_SERVER['REQUEST_URI']);
             $name_company = $routes[1];
             $map_query = mysql_query("
+
                     SELECT  `venues`.`coordinate`, `venues`.`venuename_rus`, `companies`.`id_company`
+
                     FROM  `venues` 
                     JOIN  `companies` ON  `venues`.`id_company` =  `companies`.`id_company` 
                     WHERE  `companies`.`compname_eng` =  '$name_company' "); // Координаты для карты
@@ -24,7 +26,7 @@ class Model_Company extends Model{
                     WHERE companies.compname_eng = '$name_company' "); //  Описание компании
 
             $courses_query = mysql_query("
-                    SELECT distinct compname_eng, coursename_eng, coursename_rus, compname_rus, minprice, description 
+                    SELECT distinct `courses`.`id_course`, compname_eng, coursename_eng, coursename_rus, compname_rus, minprice, description 
                     FROM `courses` 
                     JOIN `cv` on `courses`.`id_course` = `cv`.`id_course` 
                     JOIN `venues` on `cv`.`id_venue` = `venues`.`id_venue`                       
@@ -67,7 +69,9 @@ class Model_Company extends Model{
             $name_course_eng = $routes[2];
             
             $info_company_query = mysql_query("   
+
                         SELECT `id_company`, `compname_rus`, `telephone`
+
                         FROM `companies` 
                         where   `companies`.`compname_eng` =  '$name_companies_eng' "); // Информация о компании на странице курса
 

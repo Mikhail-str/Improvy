@@ -27,30 +27,18 @@
                 <input type="text" id="Address" class="span6" placeholder="Адрес компании" name="Address">        
                 <input type="text" id="Site" class="span6" placeholder="Сайт, если есть" name="Site">           
                 <input type="text" id="Phone" class="span6" placeholder="Номер телефона" name="Phone"> 
+                
                 <div class="control-group">
                     <div class="controls">
                         <div id="1" style="height: 20px;"> </div>                     
                     </div>  
                 </div>
                 <button class="btn btn-info btn-block" type="button" id="sub">Регистрация</button>       
-        </form>          
+        </form> 
+          
    </div>
 </div>
 </div>
 <div class = "hfooter"></div>
 </div>              
-                       
-                      
-    
-                        
-                          
-                       
-                      
-                        
-                    
-                  
-                                                                           
-                                   
-                
-
 

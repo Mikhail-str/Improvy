@@ -6,10 +6,10 @@
 		<meta name="keywords" content="" />
 		<title>ImprovY</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-		<link href="/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
-        <link href="/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
+        <link href="/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
+        <link href="/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" /> 
+        
         <link href="/css/style.css" rel="stylesheet" type="text/css"/>
-        <script type="text/javascript" src="https://getfirebug.com/firebug-lite.js"></script>
         <script src="/js/jquery.js" type="text/javascript"></script>
         <script src="/js/jquery.cookie.js" type="text/javascript"></script>
         <script src="/js/code.js" type="text/javascript"></script>        
@@ -44,34 +44,45 @@
         <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
           <div class="modal-header" id="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="myModalLabel">ImprovY</h3>
+            <h3 id="myModalLabel">ImprovY</h3> 
           </div>
           <div class="modal-body">
                 <form class="form-horizontal" method="POST" action="" id="entForm">
                      <div class="control-group">
                         <label class="control-label" for="inputEmail">Email</label>
                         <div class="controls">
-                          <input type="text" id="entEmail" placeholder="Email" name="Email">
+                          <div class="input-prepend">
+                            <span class="add-on"><i class="icon-envelope"></i></span>
+                            <input type="text" id="entEmail" placeholder="Email" name="Email">
+                          </div>
                         </div>
                       </div>
-                      <div class="control-group">
+                      <div class="control-group mb">
                         <label class="control-label" for="inputPassword">Пароль</label>
                         <div class="controls">
-                          <input type="password" id="entPassword" placeholder="Пароль" name="Pass">
+                          <div class="input-prepend">
+                            <span class="add-on"><i class="icon-lock"></i></span>
+                            <input type="password" id="entPassword" placeholder="Пароль" name="Pass">
+                          </div>
                         </div>
                       </div>
                       <div class="control-group">
                         <div class="controls">                          
-                          <button class="btn btn-primary" type="button" id="ent" href='#'>Войти</button>                                                 
+                          <button class="btn btn-primary" type="button" id="ent" href='#'>Войти</button>&nbsp&nbsp&nbsp&nbsp&nbsp 
+                          <a href=""><small>Забыли пароль?</small></a>                                                
                         </div>
-                      </div>                      
+                      </div>
+                                              
+                          
+                          
+                        
+                      
                 </form>
                 
           </div>
          
           <div class="modal-footer">
-           <!-- <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-            <button class="btn btn-primary">Save changes</button> -->
+            <a href=""><small>Зарегистрироваться</small></a>
           </div>
         </div>
         <div class = "content">
@@ -79,10 +90,10 @@
                     <div class="navbar navbar-fixed-top">
                         <div class="navbar-inner ">
                             <div class="container">
-                                <a class="brand" href="/main">ImprovY</a>
+                                <a class="brand" href="/main">ImprovY <sub><i>beta</i></sub> </a> 
                                 <a class="brand" href="/main">Санкт-Петербург</a>
                                 <ul class="nav pull-right">
-                                    <li><a href='/contacts'>Контакты</a></li>
+                                    <li><a href='/contacts'>О нас</a></li>
                                     
                                     <?php
                                    if (!isset($_SESSION['id'])) {
@@ -105,30 +116,86 @@
         <footer class="footer">
             <div class="container">
                 <div class="row">
-                    <div class="span6">
-                       </div>
-                    <div class="span6 ">
-                            <div class="cocial" >
+                    <div class="span8 vm">
+                      
+                        <ul class="inline">
+                          <li><small>Copyright © ImprovY 2013</small></li>
+                          <li><a href="/main"><small>Главная</small></a></li>
+                          <li><a href="/about"><small>О нас</small></a></i>
+                          <li><a href="/registration"><small>Организаторам</small></a></li>
+                        </ul>
+                        
+                    </div>
+                    <div class="span4 " style="width: 320px !important; margin-left:0px;">
+                            <div class="pull-left" >
                                 <div class="cocial_img" >
                                     <a href="http://vk.com/improvy" target="_blank">
-                                        <img  src="/images/main/vk_over.png" onmouseover="this.src='/images/main/vk.png';" onmouseout="this.src='/images/main/vk_over.png';"/>
+                                        <img  src="/images/main/vk_over.png" onmouseover="this.src='/images/main/vk.png';" onmousedown="this.src='/images/main/vk_click.png';" onmouseout="this.src='/images/main/vk_over.png';"/>
                                      </a>
                                  </div>
                                 <div class="cocial_img" >
                                     <a href="http://www.facebook.com/groups/608762325807004/" target="_blank">
-                                        <img  src="/images/main/facebook_over.png" onmouseover="this.src='/images/main/facebook.png';" onmouseout="this.src='/images/main/facebook_over.png';"/>
+                                        <img  src="/images/main/facebook_over.png" onmouseover="this.src='/images/main/facebook.png';"onmousedown="this.src='/images/main/facebook_click.png';" onmouseout="this.src='/images/main/facebook_over.png';"/>
                                     </a>
                                 </div>
                                 <div class="cocial_img" >
-                                    
-                                        <img  src="/images/main/twiter_over.png" onmouseover="this.src='/images/main/twiter.png';" onmouseout="this.src='/images/main/twiter_over.png';"/>
-                                   
+                                    <a href="" target="_blank">
+                                        <img  src="/images/main/odnoklassniki_over.png" onmouseover="this.src='/images/main/odnoklassniki.png';"onmousedown="this.src='/images/main/odnoklassniki_click.png';" onmouseout="this.src='/images/main/odnoklassniki_over.png';"/>
+                                    </a>
+                                </div>
+                                <div class="cocial_img" >
+                                    <a href="" target="_blank">
+                                        <img  src="/images/main/twiter_over.png" onmouseover="this.src='/images/main/twiter.png';"onmousedown="this.src='/images/main/twitter_click.png';" onmouseout="this.src='/images/main/twiter_over.png';"/>
+                                    </a>
                                 </div>
                             </div>
                     
                     </div>
                 </div>
             </div>
+            
+            <!-- Yandex.Metrika counter -->
+            <script type="text/javascript">
+            (function (d, w, c) {
+                (w[c] = w[c] || []).push(function() {
+                    try {
+                        w.yaCounter20304454 = new Ya.Metrika({id:20304454,
+                                webvisor:true,
+                                clickmap:true,
+                                trackLinks:true,
+                                accurateTrackBounce:true});
+                    } catch(e) { }
+                });
+            
+                var n = d.getElementsByTagName("script")[0],
+                    s = d.createElement("script"),
+                    f = function () { n.parentNode.insertBefore(s, n); };
+                s.type = "text/javascript";
+                s.async = true;
+                s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+            
+                if (w.opera == "[object Opera]") {
+                    d.addEventListener("DOMContentLoaded", f, false);
+                } else { f(); }
+            })(document, window, "yandex_metrika_callbacks");
+            </script>
+            <noscript><div><img src="//mc.yandex.ru/watch/20304454" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+            <!-- /Yandex.Metrika counter -->
+            
+            <script type="text/javascript">
+
+              var _gaq = _gaq || [];
+              _gaq.push(['_setAccount', 'UA-38811259-1']);
+              _gaq.push(['_trackPageview']);
+            
+              (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+              })();
+            
+            </script>
+            
         </footer> 
 				
 	</body>

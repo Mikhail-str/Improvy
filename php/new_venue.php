@@ -58,7 +58,7 @@ $result_new_course = mysql_query("
                 `id_company` ,
                 `venuename_eng` ,
                 `venuename_rus` ,
-                `telephone` ,
+                `phone` ,
                 `metro` ,
                 `country` ,
                 `street` ,
@@ -82,7 +82,7 @@ $result_new_course = mysql_query("
                 '$coordinate'
                 );
 ") || die(mysql_error());
-
+echo 1323;
 
 
 

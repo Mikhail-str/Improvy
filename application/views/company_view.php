@@ -1,4 +1,9 @@
 <div class="container pad">
+
+  <?php
+         echo "<div class='navig'><i class='icon-arrow-left'></i><a href='".$_SESSION["crumb"]."'>Назад к поиску</a></div>";   
+  ?>
+
 <div class="row">
     <div class="span3">
         <div class="thumbnail" style="padding:5px;">
@@ -12,6 +17,7 @@
                     map.controls.add("zoomControl").add("mapTools").add(new ymaps.control.TypeSelector(["yandex#map", "yandex#satellite", "yandex#hybrid", "yandex#publicMap"]));
                     <?php
                     $ij=1;
+
                     
                     $routes = explode('/', $_SERVER['REQUEST_URI']);
                     $name_company = $routes[1];
@@ -24,6 +30,7 @@
                     
                     
                     
+
                     while($row = mysql_fetch_array($data['map_query']))
                     {
                         echo 'map.geoObjects.add(new ymaps.Placemark(['.$row["coordinate"].'], {balloonContent: "'.$row["venuename_rus"].'", iconContent: "'.$ij.'"}, {preset: "twirl#redIcon"}));';
@@ -32,13 +39,18 @@
                     ?>
                     
                     //map.geoObjects.add(new ymaps.Placemark([30.381806211813883, 59.9329719377242], {balloonContent: "Q-Йога", iconContent: "1"}, {preset: "twirl#redIcon"}));
-                    
-                    
-                    };</script>
+                                       
+                    };
+                    </script>
             <script type="text/javascript" src="http://api-maps.yandex.ru/2.0-stable/?lang=ru-RU&coordorder=longlat&load=package.full&wizard=constructor&onload=fid_1"></script>
             <!-- Этот блок кода нужно вставить в ту часть страницы, где вы хотите разместить карту (конец) -->
+
+
+
+
         </div>
         
+
 
         <!-- Checkbox под картой -->
         <form action="/summerhouse" method="post">
@@ -68,7 +80,7 @@
         <div id="modal_new_venue" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="myModalLabel">Modal header</h3>
+            <h3 id="myModalLabel">Добавление адреса</h3>
             </div>
             <form class="form-horizontal" method="POST" action="/php/new_venue.php" id="form_new_venue" name="form_new_venue">
                 <div class="modal-body">
@@ -123,9 +135,9 @@
                     </div>
               </div>
               <div class="modal-footer">
-                   <!--<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                   <input  type="submit" class="btn btn-primary" value="PHP" />-->
-                   <button class="btn btn-primary">Отмена</button>
+                   <button class="btn" data-dismiss="modal" aria-hidden="true">Отмена</button>
+                   <!--<input  type="submit" class="btn btn-primary" value="PHP" />
+                   <button class="btn btn-primary">Отмена</button>-->
                    <input  class="btn btn-primary" value="Добавить курс" id="button_add_venue"/>
               </div>
           </form> 
@@ -222,7 +234,6 @@
                         echo (" <div class='accordion-group'>                        
                                     <div class='accordion-heading' >
                                         <div class='accordion-toggle' data-toggle='collapse' data-parent='#accordion2' data-target='#collapse".$i."'>                                            
-                                            
                                             <table class = 'table_course'><tr>
                                             <td width = '150px'>
                                             <div class = 'picture_course'>
@@ -243,7 +254,15 @@
                                                 </span>                                    
                                             </div>
                                             </td>
-                                            <td>");
+                                            <td> ");
+                                            if (isset($_SESSION['id'])&&($_SESSION['id']==$id_com))
+                                            { 
+                                                echo '  <div style = "position:relative; top: -25px; left: 0;">
+                                                            <i class="icon-remove icon-remove_button"   id="'.$row["id_course"].'" onclick="f_course(this)">
+                                                            </i>
+                                                        </div>';
+                                            }
+                                           echo ("");
                                             if ($row['minprice']!='0')
                                             echo "
                                             <div class='price_course'>
@@ -265,6 +284,7 @@
                                 ");
                         $i=$i+1;
                         }
+
                     } else
                         if (isset($_SESSION['id'])&&($_SESSION['id']==$id_com))
                         {
@@ -273,7 +293,28 @@
                                     <button class='close' data-dismiss = 'alert'>&times;</button>
                                 </div> ");
                         }
-                ?>
+
+                ?>            
+                <script>            
+               function f_course(el) {
+                    id_remove_course = el.id;
+                    alert(id_remove_course);
+                    
+                    
+                        $.ajax({
+            			type: "POST",
+            			url: '/php/remove_course.php',
+            			data: {
+                            "id_remove_course": id_remove_course
+            			},
+            			success: function(data) {
+            				    alert(data);
+            				    location.reload();
+            				    window.location = location.href;            					
+            			}
+            		})
+                }
+            </script>
              
         <?php                
         if (isset($_SESSION['id'])&&($_SESSION['id']==$id_com))

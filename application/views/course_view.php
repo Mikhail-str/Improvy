@@ -1,4 +1,10 @@
+
 <div class="container pad">
+<ul>
+<?php
+         echo "<div class='navig'><i class='icon-arrow-left'></i><a href='".$_SESSION["crumb"]."'>Назад к поиску</a></div>";   
+  ?>
+</ul>
     <div class="row">
         <div class="span12">
             <h4 style="margin-top: 0 !important;">
