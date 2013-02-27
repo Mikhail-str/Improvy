@@ -1,7 +1,9 @@
 <div class="container pad">
 
   <?php
+    if (isset($_SESSION["crumb"])) {
          echo "<div class='navig'><i class='icon-arrow-left'></i><a href='".$_SESSION["crumb"]."'>Назад к поиску</a></div>";   
+     }
   ?>
 
 <div class="row">

@@ -21,11 +21,11 @@
                   Регистрация организатора <small> </small>
                 </legend>
               
-                <input type="text" id="Inputname" class="span6" placeholder="Название компании" name="name"> 
+                <input type="text" id="Inputname" class="span6" placeholder="Название компании" name="name required"> 
                 <input type="text" id="fio" class="span6" placeholder="Имя Фамилия" name="fio">
-                <input type="text" id="inputEmail" class="span6" placeholder="Email" name="Email"> 
+                <input type="email" id="inputEmail" class="span6" placeholder="Email" name="Email"> 
                 <input type="text" id="Address" class="span6" placeholder="Адрес компании" name="Address">        
-                <input type="text" id="Site" class="span6" placeholder="Сайт, если есть" name="Site">           
+                <input type="url" id="Site" class="span6" placeholder="Сайт, если есть" name="Site">           
                 <input type="text" id="Phone" class="span6" placeholder="Номер телефона" name="Phone"> 
                 
                 <div class="control-group">

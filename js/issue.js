@@ -3,30 +3,30 @@ $(function() {
 	$(".iss").each(function(i) {
 		arr[i] = $(this);
 	})
-	
+
 	var len = arr.length;
 	var It_on_page = 5;
-	var pages = Math.round(len/It_on_page)+1;
-	for (var i = 1; i< pages; i++) {
-		$("#nav_num").append("<li class='disable nums'><a href='#'>"+i+"</a></li>")
+	var pages = Math.round(len / It_on_page) + 1;
+	for (var i = 1; i < pages; i++) {
+		$("#nav_num").append("<li class='disable nums'><a href='#'>" + i + "</a></li>")
 	}
 	var temp;
 	var start = 0;
 	for (var i = start; i < It_on_page; i++) {
-				arr[i].show();
-			}
+		arr[i].show();
+	}
 	$(".nums a").click(function() {
 		$(".nums").each(function(i) {
 			$(this).removeClass("active").addClass("disable");
-		})		
+		})
 		$(this).parent().removeClass("disable").addClass("active");
 
 		var page = $(this).text()
 		temp = start;
 		start = page * It_on_page - It_on_page;
-		var finish = start+It_on_page;
-			if (finish > len) finish = len;
-		
+		var finish = start + It_on_page;
+		if (finish > len) finish = len;
+
 		/*if (temp > start) {
 			for (var j = temp; j<finish; j++) {
 			arr[j].hide();
@@ -48,12 +48,12 @@ $(function() {
 			}	
 			alert(start+It_on_page)
 			*/
-			for (var i = 0; i < len; i++) {
-				arr[i].hide()
-			}
-			for (var i = start; i < finish; i++) {
-				arr[i].show();
-			}
-			
+		for (var i = 0; i < len; i++) {
+			arr[i].hide()
+		}
+		for (var i = start; i < finish; i++) {
+			arr[i].show();
+		}
+
 	})
 })
