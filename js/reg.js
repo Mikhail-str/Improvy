@@ -53,7 +53,12 @@ $(function() {
 
 
 
-		if (/^[a-zA-Z0-9](([a-z0-9\-_\+\&]?)+[a-z0-9])?\@((\w([a-zA-Z0-9\-_]+\w)?\.[a-z]{2,4})|(([01]?\d\d|2[0-4]\d|25[0-5])\.([01]?\d\d|2[0-4]\d|25[0-5])\.([01]?\d\d |2[0-4]\d|25[0-5])\.([01]?\d\d|2[0-4]\d|25[0-5]))|(localhost))$/i.test(email)) {
+		if(cname == '' || name == '' || address == '' || phone == '') {
+			$("#1").append("<p class='err' style='color:red'>Заполните все обязательные поля</p>");
+			return false;
+		}
+		
+		if ((/^([a-z0-9_\-]+\.)*[a-z0-9_\-]+@([a-z0-9][a-z0-9\-]*[a-z0-9]\.)+[a-z]{2,4}$/i).test(email)) {
 
 		} else {
 			$("#1").append("<p class='err' style='color:red'>Email введен не верно</p>");
@@ -61,10 +66,7 @@ $(function() {
 		}
 
 
-		if(cname == '' || name == '' || address == '' || phone == '') {
-			$("#1").append("<p class='err' style='color:red'>Заполните все обязательные поля</p>");
-			return false;
-		}
+		
 		////////
 		$.ajax({
 			type: "POST",

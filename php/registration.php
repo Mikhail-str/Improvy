@@ -153,17 +153,7 @@ function createControl($name){ //Автоматизированное добав
 	echo "Файл не доступен для записи";
 	}
 }
-//////////////////////////////////////
-	/*$date=time();
-	
-	//Добавляем данные во временную таблицу
 
-	$q=@mysql_query("INSERT into `validate_temp` VALUES('','".$email."','".$date."')");
-
-	if(@mysql_error($conn_id)!='') {
-   		 die("Ошибка в запросе к БД !");
-    }
-*/
 //Сообщение зарегистрированному пользователю
 
 	$message="Вы получили это письмотак как, зарешистрировались на Improvy.ru.
@@ -178,7 +168,7 @@ function createControl($name){ //Автоматизированное добав
 	//Посылаем сообщение пользователю
 
 	@mail($email,"Уведомление",$message,"Content-Type: text/html; 
-	charset=windows-1251","From: root@simprovy.ru");
+	charset=windows-1251");
 
 	@mysql_close();
 ///////////////////////////////////
